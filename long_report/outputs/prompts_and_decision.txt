@@ -1,0 +1,13 @@
+Inspection observations and proposed rule, supplied by the student on 9 November 2026:
+
+1. Some suspicious training images contain almost no useful information about their city. For example, there are close-up photos of flowers, birds, food, museum objects, and indoor spaces without visible urban surroundings.
+
+2. The model frequently confuses visually similar cities. Osaka streets and traditional buildings are often predicted as Tokyo, while Busan scenes are often predicted as Seoul.
+
+Proposed controlled experiment:
+
+Exclude only training photographs that show isolated objects, food, animals, or other close-up subjects without any recognizable urban or location-specific context.
+
+Keep the model architecture, augmentation, random seed, and official training budget unchanged.
+
+Status: UNTESTED. The student instructed that no images be removed and no additional training be started because the deadline was extremely close.

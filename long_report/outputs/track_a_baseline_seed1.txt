@@ -1,0 +1,18 @@
+$ python src/official.py --tag baseline --seed 1
+# commit 84b5b12
+Track A, seed 1, on cuda: all training photos (seoul 11274, busan 5191, tokyo 13347, osaka 7200, taipei 7245)
+3906 steps of 64 photos = 249,984 photos through the network
+  step   390/3906  loss 1.422  (227s)
+  step   780/3906  loss 1.286  (453s)
+  step  1170/3906  loss 1.192  (673s)
+  step  1560/3906  loss 1.123  (893s)
+  step  1950/3906  loss 1.077  (1111s)
+  step  2340/3906  loss 0.994  (1403s)
+  step  2730/3906  loss 0.948  (1625s)
+  step  3120/3906  loss 0.860  (1843s)
+  step  3510/3906  loss 0.822  (2061s)
+  step  3900/3906  loss 0.780  (2282s)
+  step  3906/3906  loss 0.782  (2284s)
+
+validation score 0.495  (seoul 0.570, busan 0.394, tokyo 0.626, osaka 0.365, taipei 0.521)
+training took 38.1 min; wrote /content/drive/MyDrive/mas1004/assignment2/results/baseline_seed1/model.onnx

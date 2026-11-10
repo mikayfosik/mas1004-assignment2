@@ -16,13 +16,13 @@
 \usepackage{mas1004}
 
 \reporttitle{Assignment 2: Long report}
-\studentname{Your name}
-\studentid{Your student ID}
+\studentname{Kim Sofia}
+\studentid{20251232}
 
 \begin{document}
 \makeheader
 
-\fillin{Your leaderboard nickname, and the tags of your last Track A and Track B releases.}
+Leaderboard nickname: 허니머스타드. Current releases: Track A \texttt{track-a-1} (starter recipe) and Track B \texttt{track-b-1} (Track B starter baseline). Track A leaderboard score: Not observed. Track B leaderboard score: Not observed.
 
 % The sections below are a suggestion. Change, merge or add sections as you
 % like; README.md, "The long report", says what a reader should be able to see.
@@ -35,39 +35,48 @@
 \toprule
 tag & what changed from the run before & validation \\
 \midrule
-\multicolumn{3}{l}{\fillin{one row per recipe, with the numbers from experiments.csv}} \\
+baseline, seed 0 & Starter recipe; all 44,257 starter training photos; official budget of 249,984 photo exposures. & 0.4967 \\
+baseline, seed 1 & Same starter recipe and data as seed 0; seed changed only to measure run-to-run variation. & 0.4948 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\fillin{What you tried, why, and what you think each result means.}
+The two baseline scores differed by 0.0019 (mean 0.4958). I used these two runs as a starting measurement and as an estimate of seed-to-seed variation. No cleaning, selection, augmentation, or architecture conclusion is drawn from the baseline alone.
 
-\fillin{Your final recipe and selection, and their leaderboard score next to
-their validation score.}
+The current Track A release is \texttt{track-a-1}, the unchanged starter recipe. Its leaderboard score was not observed, so no comparison between leaderboard and validation is claimed.
 
 % ---------------------------------------------------------------------------
 \section*{Decisions you made from photos}
 
-\picturefile{figures/mistakes_baseline_seed0_busan_00.png}
+I did not copy class-only starter-photo contact sheets into this public repository. I inspected representative training sheets and the locally generated b1 mistake and suspect sheets for Busan and Osaka.
 
-\fillin{What you looked at, what you saw in common, and the rule you wrote
-before acting.}
+In the suspicious training images, I observed some isolated flowers, birds, food, museum objects, and indoor spaces without visible urban surroundings. In the error sheets, Osaka street and traditional-building scenes were often predicted as Tokyo, while Busan scenes were often predicted as Seoul. The saved Track B b1 confusion matrix recorded 785 Osaka validation photos predicted as Tokyo and 410 Busan validation photos predicted as Seoul.
 
-\fillin{What you changed (the output of curate.py count, or the photos you
-added), and the scores before and after.}
+I wrote the following prospective rule before acting: exclude only training photographs that show isolated objects, food, animals, or other close-up subjects without recognizable urban or location-specific context. This rule is \textbf{untested}: no photo was removed, no selection file was created, and no follow-up model was trained before the deadline.
 
-\fillin{The requests you gave your agent for these decisions.}
+The relevant requests were: ``Some suspicious training images contain almost no useful information about their city'' and ``Exclude only training photographs that show isolated objects, food, animals, or other close-up subjects without any recognizable urban or location-specific context.'' I also specified that the model architecture, augmentation, random seed, and official training budget should stay unchanged for a future comparison. No action was taken on that proposal.
+
+\subsection*{Saved observation and decision record}
+\outputfile{outputs/prompts_and_decision.txt}
 
 % ---------------------------------------------------------------------------
 \section*{Track B}
 
-\fillin{What you tried, one step at a time, and the validation score after
-each step.}
+\begin{center}\footnotesize
+\begin{tabular}{lp{0.6\linewidth}r}
+\toprule
+tag & what changed from the run before & validation \\
+\midrule
+b1 & Starter Track B baseline: ResNet18 at 224 pixels, ImageNet-1K V1 starting weights, \texttt{data/starter/train}, 4 epochs. & 0.4961 \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\fillin{How you collected any extra photos.}
+The b1 submission passed the local format and limit checker: 11.17 million parameters, 1.81 billion multiply-adds per 224-by-224 photo, and a 44.7 MB ONNX file. This established a valid starter Track B submission before attempting a controlled improvement. No changed Track B model was trained.
 
-\fillin{Your validation score next to your leaderboard score, and why they
-might disagree.}
+No extra photos were used in b1; it trained on \texttt{data/starter/train}.
+
+The b1 validation score was 0.4961. Its leaderboard score was not observed, so no comparison between leaderboard and validation is claimed.
 
 \subsection*{Your submission, as the grader sees it}
 \outputfile{outputs/check_submission.txt}
@@ -75,10 +84,9 @@ might disagree.}
 % ---------------------------------------------------------------------------
 \section*{What made the difference}
 
-\fillin{Which change helped most and which least, in both tracks, with your
-numbers.}
+No changed cleaning, augmentation, or additional-data experiment was completed before the deadline. Therefore, this report does not claim that any change helped or hurt.
 
-\fillin{What you would do next with one more week.}
+With one more week, I would test the written close-up/isolated-subject exclusion rule as one controlled Track A change, keeping the architecture, augmentation, seed comparison, and official budget fixed. I would then compare its validation score with the baseline and inspect the new errors before making another change.
 
 % ---------------------------------------------------------------------------
 \section*{All runs}
